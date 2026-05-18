@@ -15,35 +15,35 @@ USE filminis;
 
 CREATE TABLE pais (
     id_pais   INT PRIMARY KEY AUTO_INCREMENT,
-    nome      VARCHAR(255) NOT NULL
+    nome      VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE linguagem (
     id_linguagem INT PRIMARY KEY AUTO_INCREMENT,
-    nome         VARCHAR(255) NOT NULL
+    nome         VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE categoria (
     id_categoria INT PRIMARY KEY AUTO_INCREMENT,
-    nome         VARCHAR(255) NOT NULL
+    nome         VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE produtora (
     id_produtora INT PRIMARY KEY AUTO_INCREMENT,
-    nome         VARCHAR(255) NOT NULL
+    nome         VARCHAR(255) NOT NULL UNIQUE
 );
 
 -- ── Pessoas ───────────────────────────────────────────────────────────────────
 
 CREATE TABLE ator (
     id_ator    INT PRIMARY KEY AUTO_INCREMENT,
-    nome       VARCHAR(255) NOT NULL,
+    nome       VARCHAR(255) NOT NULL UNIQUE,
     sobrenome  VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE diretor (
     id_diretor INT PRIMARY KEY AUTO_INCREMENT,
-    nome       VARCHAR(255) NOT NULL,
+    nome       VARCHAR(255) NOT NULL UNIQUE,
     sobrenome  VARCHAR(255) NOT NULL
 );
 
@@ -77,15 +77,15 @@ CREATE TABLE produtora_pais (
 
 CREATE TABLE filme (
     id_filme               INT PRIMARY KEY AUTO_INCREMENT,
-    titulo                 VARCHAR(255) NOT NULL,
+    titulo                 VARCHAR(255) NOT NULL UNIQUE,
     id_produtora_principal INT,
     orcamento              DECIMAL(15,2),
     duracao                TIME,
-    sinopse                LONGTEXT,
+    sinopse                LONGTEXT UNIQUE,
     ano                    INT,
-    poster                 VARCHAR(255),
-    banner                 VARCHAR(255),
-    trailer                VARCHAR(255),
+    poster                 VARCHAR(255) UNIQUE,
+    banner                 VARCHAR(255) UNIQUE,
+    trailer                VARCHAR(255) UNIQUE,
     flag                   BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (id_produtora_principal) REFERENCES produtora(id_produtora)
 );
@@ -144,7 +144,7 @@ CREATE TABLE usuario (
     id_usuario      INT AUTO_INCREMENT PRIMARY KEY,
     nome            VARCHAR(255) NOT NULL,
     sobrenome       VARCHAR(255),
-    apelido         VARCHAR(100),
+    apelido         VARCHAR(100) UNIQUE,
     email           VARCHAR(255) NOT NULL UNIQUE,
     senha           VARCHAR(255) NOT NULL,
     data_nascimento DATE,
@@ -216,27 +216,107 @@ INSERT INTO diretor (nome, sobrenome) VALUES
 ('Denis','Villeneuve'),('Lana','Wachowski'),('Lilly','Wachowski'),
 ('Maggie','Kang'),('Chris','Appelhans');
 
-INSERT INTO filme (titulo, id_produtora_principal, orcamento, duracao, sinopse, ano, poster, flag) VALUES
-('Crepúsculo',1,37000000,'02:02:00','Bella Swan se apaixona pelo misterioso e deslumbrante Edward Cullen, descobrindo que ele é um vampiro.',2008,'https://br.web.img2.acsta.net/medias/nmedia/18/87/02/32/19871201.jpg',TRUE),
-('A Princesa Mononoke',2,20000000,'02:13:00','Um jovem guerreiro se envolve em um conflito entre deuses da floresta e humanos que destroem a natureza.',1997,'https://i0.wp.com/studioghibli.com.br/wp-content/uploads/2025/03/Poster-Princesa-Mononoke-IMAX-scaled.jpeg',TRUE),
-('Nosferatu',3,50000000,'02:12:00','Uma jovem casada é assombrada por um antigo mal enquanto seu marido viaja para fechar negócio com um misterioso conde.',2024,'https://m.media-amazon.com/images/I/715BLU5YPZL.jpg',TRUE),
-('Hellboy',4,50000000,'02:01:00','Um ser sobrenatural luta contra forças das trevas enquanto protege o mundo humano.',2019,'https://img.elo7.com.br/product/zoom/25FA55C/big-poster-filme-hellboy-2019-lo004-tamanho-90x60-cm-hellboy.jpg',TRUE),
-('The Batman',5,185000000,'02:56:00','Bruce Wayne rastreia um assassino serial chamado Charada que expõe a corrupção em Gotham.',2022,'https://img.elo7.com.br/product/zoom/3FBA809/big-poster-filme-batman-2022-90x60-cm-lo002-poster-batman.jpg',TRUE),
-('Superman',6,225000000,'02:30:00','Clark Kent abraça seu legado kryptoniano enquanto enfrenta Lex Luthor.',2025,'https://ingresso-a.akamaihd.net/b2b/production/uploads/articles-content/8923869c-f8a6-4258-ba74-4170bf7fb202.jpg',TRUE),
-('Pecadores',7,90000000,'02:17:00','Dois irmãos retornam ao Mississippi para abrir um negócio, mas o sobrenatural bate à porta.',2025,'https://ingresso-a.akamaihd.net/prd/img/movie/pecadores/7f6c9699-002e-43a8-adb3-49d2055014fd.webp',TRUE),
-('Frankenstein',8,120000000,'02:30:00','Guillermo del Toro adapta o clássico de Mary Shelley sobre um cientista que cria vida.',2025,'https://s3.amazonaws.com/nightjarprod/content/uploads/sites/130/2025/08/31180656/frankenstein-2025-poster-691x1024.jpg',TRUE),
-('Adrenalina',9,12000000,'01:28:00','Envenenado por rivais, o assassino Chev Chelios precisa manter sua adrenalina alta para sobreviver.',2006,'https://br.web.img3.acsta.net/medias/nmedia/18/86/97/09/19870658.jpg',TRUE),
-('Moulin Rouge',10,50000000,'02:06:00','Um jovem escritor se apaixona pela estrela do Moulin Rouge em um Paris boêmio.',2001,'https://uauposters.com.br/media/catalog/product/3/4/346820211103-uau-posters-moulin-rouge-filmes.jpg',TRUE),
-('Vingadores: Ultimato',11,356000000,'03:01:00','Os Vingadores se unem para reverter os efeitos devastadores do Thanos.',2019,'https://img.elo7.com.br/product/zoom/259A7AA/big-poster-filme-vingadores-ultimato-lo001-tamanho-90x60-cm-poster-marvel.jpg',TRUE),
-('Interestelar',12,165000000,'02:49:00','Um ex-piloto viaja por um buraco de minhoca em busca de um novo lar para a humanidade.',2014,'https://br.web.img3.acsta.net/pictures/14/10/31/20/39/476171.jpg',TRUE),
-('John Wick',13,20000000,'01:41:00','Um ex-assassino retorna à ativa para vingar a morte de seu cachorro, presente da esposa falecida.',2014,'https://img.elo7.com.br/product/zoom/265E435/big-poster-filme-john-wick-lo03-tamanho-90x60-cm-nerd.jpg',TRUE),
-('O Castelo Animado',2,24000000,'01:59:00','Sophie é amaldiçoada e transformada em velha; busca quebrar o feitiço no castelo do mago Howl.',2004,'https://i.pinimg.com/474x/ec/f5/96/ecf596b4b836dba11873a07b12381088.jpg',TRUE),
-('Homem-Aranha: Sem Volta Para Casa',11,200000000,'02:28:00','Peter Parker pede ao Doutor Estranho para fazer o mundo esquecer sua identidade, fragmentando o multiverso.',2021,'https://cinecriticas.com.br/wp-content/uploads/2021/12/Cine1-12.jpg',TRUE),
-('Barbie',6,145000000,'01:54:00','Barbie deixa Barbieland e vai ao mundo real para resolver uma crise existencial.',2023,'https://uauposters.com.br/media/catalog/product/cache/1/thumbnail/800x930/9df78eab33525d08d6e5fb8d27136e95/4/5/454520230615-uau-posters-barbie-2023-filmes-1.jpg',TRUE),
-('Deadpool',10,58000000,'01:48:00','Wade Wilson se torna o mercenário de boca suja Deadpool após um experimento que lhe dá poderes de regeneração.',2016,'https://img.elo7.com.br/product/zoom/1E3BBFE/big-poster-do-filme-deadpool-tamanho-90x-0-cm-loot-op-011-geek.jpg',TRUE),
-('Duna',14,165000000,'02:35:00','Paul Atreides lidera uma revolta no planeta mais perigoso do universo.',2021,'https://img.elo7.com.br/product/zoom/3E882A2/big-poster-filme-duna-tamanho-90x60-cm-duna.jpg',TRUE),
-('Matrix',6,63000000,'02:16:00','Um hacker descobre que a realidade é uma simulação e se junta à resistência humana.',1999,'https://img.elo7.com.br/product/zoom/2679A17/big-poster-filme-matrix-lo02-tamanho-90x60-cm-poster-de-filme.jpg',TRUE),
-('KPop Demon Hunters',15,80000000,'01:45:00','Um grupo de K-Pop mundialmente famoso equilibra a vida no palco com sua identidade secreta de caçadoras de demônios.',2025,'https://m.media-amazon.com/images/I/81Mtr7elTnL.jpg',TRUE);
+INSERT INTO filme (titulo, id_produtora_principal, id_pais_origem, orcamento, duracao, sinopse, ano, poster, flag) VALUES
+('Crepúsculo',1,1,37000000,'02:02:00',
+'Bella Swan se apaixona pelo misterioso e deslumbrante Edward Cullen, descobrindo que ele é um vampiro.',
+2008,
+'https://br.web.img2.acsta.net/medias/nmedia/18/87/02/32/19871201.jpg',
+TRUE),
+('A Princesa Mononoke',2,3,20000000,'02:13:00',
+'Um jovem guerreiro se envolve em um conflito entre deuses da floresta e humanos que destroem a natureza.',
+1997,
+'https://i0.wp.com/studioghibli.com.br/wp-content/uploads/2025/03/Poster-Princesa-Mononoke-IMAX-scaled.jpeg',
+TRUE),
+('Nosferatu',3,1,50000000,'02:12:00',
+'Uma jovem casada é assombrada por um antigo mal enquanto seu marido viaja para fechar negócio com um misterioso conde.',
+2024,
+'https://m.media-amazon.com/images/I/715BLU5YPZL.jpg',
+TRUE),
+('Hellboy',4,1,50000000,'02:01:00',
+'Um ser sobrenatural luta contra forças das trevas enquanto protege o mundo humano.',
+2019,
+'https://img.elo7.com.br/product/zoom/25FA55C/big-poster-filme-hellboy-2019-lo004-tamanho-90x60-cm-hellboy.jpg',
+TRUE),
+('The Batman',5,1,185000000,'02:56:00',
+'Bruce Wayne rastreia um assassino serial chamado Charada que expõe a corrupção em Gotham.',
+2022,
+'https://img.elo7.com.br/product/zoom/3FBA809/big-poster-filme-batman-2022-90x60-cm-lo002-poster-batman.jpg',
+TRUE),
+('Superman',6,1,225000000,'02:30:00',
+'Clark Kent abraça seu legado kryptoniano enquanto enfrenta Lex Luthor.',
+2025,
+'https://ingresso-a.akamaihd.net/b2b/production/uploads/articles-content/8923869c-f8a6-4258-ba74-4170bf7fb202.jpg',
+TRUE),
+('Pecadores',7,1,90000000,'02:17:00',
+'Dois irmãos retornam ao Mississippi para abrir um negócio, mas o sobrenatural bate à porta.',
+2025,
+'https://ingresso-a.akamaihd.net/prd/img/movie/pecadores/7f6c9699-002e-43a8-adb3-49d2055014fd.webp',
+TRUE),
+('Frankenstein',8,1,120000000,'02:30:00',
+'Guillermo del Toro adapta o clássico de Mary Shelley sobre um cientista que cria vida.',
+2025,
+'https://s3.amazonaws.com/nightjarprod/content/uploads/sites/130/2025/08/31180656/frankenstein-2025-poster-691x1024.jpg',
+TRUE),
+('Adrenalina',9,1,12000000,'01:28:00',
+'Envenenado por rivais, o assassino Chev Chelios precisa manter sua adrenalina alta para sobreviver.',
+2006,
+'https://br.web.img3.acsta.net/medias/nmedia/18/86/97/09/19870658.jpg',
+TRUE),
+('Moulin Rouge',10,5,50000000,'02:06:00',
+'Um jovem escritor se apaixona pela estrela do Moulin Rouge em um Paris boêmio.',
+2001,
+'https://uauposters.com.br/media/catalog/product/3/4/346820211103-uau-posters-moulin-rouge-filmes.jpg',
+TRUE),
+('Vingadores: Ultimato',11,1,356000000,'03:01:00',
+'Os Vingadores se unem para reverter os efeitos devastadores do Thanos.',
+2019,
+'https://img.elo7.com.br/product/zoom/259A7AA/big-poster-filme-vingadores-ultimato-lo001-tamanho-90x60-cm-poster-marvel.jpg',
+TRUE),
+('Interestelar',12,1,165000000,'02:49:00',
+'Um ex-piloto viaja por um buraco de minhoca em busca de um novo lar para a humanidade.',
+2014,
+'https://br.web.img3.acsta.net/pictures/14/10/31/20/39/476171.jpg',
+TRUE),
+('John Wick',13,1,20000000,'01:41:00',
+'Um ex-assassino retorna à ativa para vingar a morte de seu cachorro, presente da esposa falecida.',
+2014,
+'https://img.elo7.com.br/product/zoom/265E435/big-poster-filme-john-wick-lo03-tamanho-90x60-cm-nerd.jpg',
+TRUE),
+('O Castelo Animado',2,3,24000000,'01:59:00',
+'Sophie é amaldiçoada e transformada em velha; busca quebrar o feitiço no castelo do mago Howl.',
+2004,
+'https://i.pinimg.com/474x/ec/f5/96/ecf596b4b836dba11873a07b12381088.jpg',
+TRUE),
+('Homem-Aranha: Sem Volta Para Casa',11,1,200000000,'02:28:00',
+'Peter Parker pede ao Doutor Estranho para fazer o mundo esquecer sua identidade, fragmentando o multiverso.',
+2021,
+'https://cinecriticas.com.br/wp-content/uploads/2021/12/Cine1-12.jpg',
+TRUE),
+('Barbie',6,1,145000000,'01:54:00',
+'Barbie deixa Barbieland e vai ao mundo real para resolver uma crise existencial.',
+2023,
+'https://uauposters.com.br/media/catalog/product/cache/1/thumbnail/800x930/9df78eab33525d08d6e5fb8d27136e95/4/5/454520230615-uau-posters-barbie-2023-filmes-1.jpg',
+TRUE),
+('Deadpool',10,1,58000000,'01:48:00',
+'Wade Wilson se torna o mercenário de boca suja Deadpool após um experimento que lhe dá poderes de regeneração.',
+2016,
+'https://img.elo7.com.br/product/zoom/1E3BBFE/big-poster-do-filme-deadpool-tamanho-90x-0-cm-loot-op-011-geek.jpg',
+TRUE),
+('Duna',14,1,165000000,'02:35:00',
+'Paul Atreides lidera uma revolta no planeta mais perigoso do universo.',
+2021,
+'https://img.elo7.com.br/product/zoom/3E882A2/big-poster-filme-duna-tamanho-90x60-cm-duna.jpg',
+TRUE),
+('Matrix',6,1,63000000,'02:16:00',
+'Um hacker descobre que a realidade é uma simulação e se junta à resistência humana.',
+1999,
+'https://img.elo7.com.br/product/zoom/2679A17/big-poster-filme-matrix-lo02-tamanho-90x60-cm-poster-de-filme.jpg',
+TRUE),
+('KPop Demon Hunters',15,9,80000000,'01:45:00',
+'Um grupo de K-Pop mundialmente famoso equilibra a vida no palco com sua identidade secreta de caçadoras de demônios.',
+2025,
+'https://m.media-amazon.com/images/I/81Mtr7elTnL.jpg',
+TRUE);
 
 -- Relações N:N (mesmas do original da professora)
 

@@ -4,56 +4,19 @@ Backend do gerenciador de filmes **Filminis**, desenvolvido como projeto avaliat
 
 ---
 
-| Tecnologia | Versão | Finalidade |
+## Tecnologias
+
+| Tecnologia | Versão | Função |
 |---|---|---|
-| Python | 3.11+ | Linguagem principal da aplicação |
-| FastAPI | 0.136.1 | Criação da API REST |
-| SQLAlchemy | 2.0.49 | ORM e manipulação do banco de dados |
-| MySQL | 8.0+ | Banco de dados relacional |
-| PyMySQL | 1.1.3 | Driver de conexão com MySQL |
-| Pydantic | 2.13.4 | Validação e serialização de dados |
-| python-jose | 3.5.0 | Autenticação via JWT |
-| Passlib + bcrypt | 1.7.4 / 5.0.0 | Criptografia e hash de senhas |
-| Uvicorn | 0.46.0 | Servidor ASGI para execução da API |
-| python-dotenv | 1.2.2 | Gerenciamento de variáveis de ambiente |
-
----
-
-## Dependências do Projeto
-
-```txt
-annotated-doc==0.0.4
-annotated-types==0.7.0
-anyio==4.13.0
-bcrypt==5.0.0
-cffi==2.0.0
-click==8.3.3
-colorama==0.4.6
-cryptography==48.0.0
-dnspython==2.8.0
-ecdsa==0.19.2
-email-validator==2.3.0
-fastapi==0.136.1
-greenlet==3.5.0
-h11==0.16.0
-idna==3.15
-passlib==1.7.4
-pyasn1==0.6.3
-pycparser==3.0
-pydantic==2.13.4
-pydantic-settings==2.14.1
-pydantic_core==2.46.4
-PyMySQL==1.1.3
-python-dotenv==1.2.2
-python-jose==3.5.0
-rsa==4.9.1
-six==1.17.0
-SQLAlchemy==2.0.49
-starlette==1.0.0
-typing-inspection==0.4.2
-typing_extensions==4.15.0
-uvicorn==0.46.0
-```
+| Python | 3.11+ | Linguagem principal |
+| FastAPI | 0.115 | Framework web / REST API |
+| SQLAlchemy | 2.0 | ORM |
+| MySQL | 8.0+ | Banco de dados |
+| PyMySQL | 1.1 | Driver MySQL para Python |
+| python-jose | 3.3 | Geração e validação de JWT |
+| passlib + bcrypt | 1.7 | Hash seguro de senhas |
+| Pydantic v2 | 2.10 | Validação de dados / schemas |
+| Uvicorn | 0.34 | Servidor ASGI |
 
 ---
 

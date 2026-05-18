@@ -67,6 +67,7 @@ class FilmeBase(BaseModel):
 
 class FilmeCreate(FilmeBase):
     id_produtora_principal: Optional[int] = None
+    id_pais_origem: Optional[int] = None
     ids_produtoras: List[int] = []
     ids_paises: List[int] = []
     ids_categorias: List[int] = []
@@ -85,6 +86,7 @@ class FilmeUpdate(BaseModel):
     banner: Optional[str] = None
     trailer: Optional[str] = None
     id_produtora_principal: Optional[int] = None
+    id_pais_origem: Optional[int] = None
     ids_produtoras: Optional[List[int]] = None
     ids_paises: Optional[List[int]] = None
     ids_categorias: Optional[List[int]] = None
@@ -104,6 +106,7 @@ class FilmeOut(BaseModel):
     banner: Optional[str]
     trailer: Optional[str]
     flag: Optional[bool]
+    pais_origem: Optional[PaisOut] = None
     produtoras: List[ProdutoraOut] = []
     paises: List[PaisOut] = []
     categorias: List[CategoriaOut] = []
@@ -119,6 +122,7 @@ class FilmeListOut(BaseModel):
     ano: Optional[int]
     poster: Optional[str]
     flag: Optional[bool]
+    pais_origem: Optional[PaisOut] = None
     categorias: List[CategoriaOut] = []
 
 # ─── Usuário ──────────────────────────────────────────────────────────────────
@@ -185,4 +189,3 @@ class RefreshIn(BaseModel):
 
 class MsgOut(BaseModel):
     detail: str
-    
