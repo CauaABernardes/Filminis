@@ -1,0 +1,140 @@
+.navbar {
+  background: #000;
+  display: flex;
+  align-items: center;
+  height: 56px;
+  padding: 0 24px;
+  gap: 0;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  border-bottom: 1px solid #222;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--text);
+  white-space: nowrap;
+  margin-right: 32px;
+  text-decoration: none;
+}
+
+.brandIcon {
+  width: 38px;
+  height: 38px;
+  border: 2px solid #555;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  background: #1a1a1a;
+}
+
+.links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+  margin-right: auto;
+}
+
+.links a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color 0.15s;
+}
+
+.links a:hover { color: var(--text); }
+
+.links a.active {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  background: #1c1c1c;
+  border: 1px solid #333;
+  border-radius: 20px;
+  padding: 6px 14px;
+  gap: 8px;
+  margin-right: 14px;
+}
+
+.searchBox input {
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-size: 0.875rem;
+  width: 150px;
+}
+.searchBox input::placeholder { color: var(--muted); }
+.searchIcon { color: var(--muted); font-size: 1rem; }
+
+.avatarWrap {
+  position: relative;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid #444;
+  background: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.avatar:hover { border-color: var(--blue); }
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  min-width: 170px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,.6);
+}
+
+.ddItem {
+  display: block;
+  width: 100%;
+  padding: 11px 16px;
+  font-size: 0.875rem;
+  color: var(--text);
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+  text-decoration: none;
+}
+.ddItem:hover { background: var(--bg3); }
+.ddItem.danger { color: #e74c3c; }
+
+.ddDivider { height: 1px; background: var(--border); }
+
+.adminBadge {
+  font-size: 0.6rem;
+  background: var(--blue);
+  color: #fff;
+  padding: 2px 5px;
+  border-radius: 8px;
+  margin-left: 6px;
+  font-weight: 700;
+  vertical-align: middle;
+}
