@@ -1,0 +1,102 @@
+.page { min-height: 100vh; }
+.inner { padding: 28px 24px; }
+
+/* Filtros */
+.filtros {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.filtroGrupo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 160px;
+  flex: 1;
+}
+
+.filtroGrupo label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.filtroInput,
+.filtroSelect {
+  padding: 9px 12px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.filtroInput:focus,
+.filtroSelect:focus { border-color: var(--blue); }
+
+.filtroSelect option { background: var(--bg2); }
+
+.btnLimpar {
+  padding: 9px 18px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  align-self: flex-end;
+}
+.btnLimpar:hover { color: var(--text); border-color: #666; }
+
+/* Cabeçalho resultados */
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.count {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+/* Grade */
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+/* Loading skeleton */
+.skel {
+  border-radius: 6px;
+  aspect-ratio: 2/3;
+  background: var(--bg3);
+  animation: pulse 1.4s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+
+.vazio {
+  grid-column: 1/-1;
+  padding: 48px 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 1rem;
+}

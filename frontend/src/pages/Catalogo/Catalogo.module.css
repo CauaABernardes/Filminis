@@ -1,0 +1,138 @@
+.page { min-height: 100vh; }
+
+/* ── Carrossel com cortinas ── */
+.heroWrap {
+  position: relative;
+  height: 320px;
+  background: #000;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+/* Cortinas SVG */
+.curtainL,
+.curtainR {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 4;
+  pointer-events: none;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.curtainL {
+  left: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 320'%3E%3Cpath d='M0,0 Q80,40 40,80 Q90,120 30,160 Q85,200 35,240 Q80,280 0,320 Z' fill='%23b71c1c'/%3E%3Cpath d='M0,0 Q55,40 25,80 Q60,120 15,160 Q58,200 18,240 Q55,280 0,320 Z' fill='%23c62828'/%3E%3Cpath d='M0,0 Q30,40 10,80 Q35,120 5,160 Q30,200 8,240 Q28,280 0,320 Z' fill='%23d32f2f'/%3E%3C/svg%3E");
+}
+.curtainR {
+  right: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 320'%3E%3Cpath d='M120,0 Q40,40 80,80 Q30,120 90,160 Q35,200 85,240 Q40,280 120,320 Z' fill='%23b71c1c'/%3E%3Cpath d='M120,0 Q65,40 95,80 Q60,120 105,160 Q62,200 102,240 Q65,280 120,320 Z' fill='%23c62828'/%3E%3Cpath d='M120,0 Q90,40 110,80 Q85,120 115,160 Q90,200 112,240 Q92,280 120,320 Z' fill='%23d32f2f'/%3E%3C/svg%3E");
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.6s;
+  z-index: 2;
+}
+.slide.active { opacity: 1; }
+
+.slideLabel {
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-shadow: 0 2px 8px #000;
+}
+
+.slidePoster {
+  height: 210px;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.8);
+}
+
+.slideQuote {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.heroArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,.65);
+  color: #fff;
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 6;
+  transition: background 0.2s;
+}
+.heroArrow:hover { background: var(--blue); }
+.heroArrowL { left: 128px; }
+.heroArrowR { right: 128px; }
+
+.heroDots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 6;
+}
+.dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.3);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.dot.active { background: #fff; }
+
+/* ── Pills de categorias ── */
+.pills {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 24px 4px;
+  margin-bottom: 32px;
+}
+.pills::-webkit-scrollbar { display: none; }
+
+.pill {
+  flex: 0 0 auto;
+  background: var(--bg3);
+  border: none;
+  border-radius: var(--radius);
+  padding: 10px 22px;
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pill:hover { background: var(--blue); }
+
+/* ── Seções ── */
+.content { padding: 0 24px; }
