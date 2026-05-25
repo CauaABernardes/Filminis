@@ -39,14 +39,15 @@ export default function Filme() {
         {youtubeId ? (
           <iframe
             className={s.trailerFrame}
-            src={`https://www.youtube.com/embed/${youtubeId}`}
+            src={`https://www.youtube-nocookie.com/embed/${youtubeId}?rel=0&modestbranding=1`}
             title="Trailer"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
           />
         ) : (
           <div className={s.trailerPlaceholder}>
-            <button className={s.playBtn}>▶</button>
+            <span style={{color:'var(--muted)', fontSize:'0.9rem'}}>Trailer não disponível</span>
           </div>
         )}
       </div>

@@ -14,6 +14,7 @@ router = APIRouter(prefix="/usuarios", tags=["Usuários"])
 def get_me(current_user: Usuario = Depends(get_current_user)):
     return current_user
 
+
 @router.patch("/me", response_model=UsuarioOut)
 def update_me(
     body: UsuarioUpdate,
@@ -29,12 +30,14 @@ def update_me(
     db.refresh(current_user)
     return current_user
 
+
 @router.get("", response_model=list[UsuarioOut])
 def list_users(
     db: Session = Depends(get_db),
     _: Usuario = Depends(require_admin),
 ):
     return db.query(Usuario).all()
+
 
 @router.patch("/{user_id}/role", response_model=UsuarioOut)
 def update_role(
@@ -50,6 +53,7 @@ def update_role(
     db.commit()
     db.refresh(user)
     return user
+
 
 @router.delete("/{user_id}", response_model=MsgOut)
 def delete_user(

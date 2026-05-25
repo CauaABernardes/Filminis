@@ -14,25 +14,15 @@
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-weight: 800;
-  font-size: 1rem;
-  color: var(--text);
-  white-space: nowrap;
   margin-right: 32px;
   text-decoration: none;
+  flex-shrink: 0;
 }
 
-.brandIcon {
-  width: 38px;
-  height: 38px;
-  border: 2px solid #555;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  background: #1a1a1a;
+.logoImg {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
 }
 
 .links {
@@ -84,19 +74,27 @@
 }
 
 .avatar {
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   border: 2px solid #444;
   background: #222;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.15rem;
   cursor: pointer;
   transition: border-color 0.2s;
+  padding: 0;
+  overflow: hidden;
 }
 .avatar:hover { border-color: var(--blue); }
+
+.avatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
 
 .dropdown {
   position: absolute;

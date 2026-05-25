@@ -8,12 +8,11 @@ export default function Navbar() {
   return (
     <nav className={s.navbar}>
       <Link to="/" className={s.brand}>
-        <div className={s.brandIcon}>🎬</div>
-        Sr. Movies
+        <img src="/logo.png" alt="Sr. Movies" className={s.logoImg} />
       </Link>
 
       <ul className={s.links}>
-        <li><Link to="/"        className={isActive('/')        ? s.active : ''}>Início</Link></li>
+        <li><Link to="/"         className={isActive('/')         ? s.active : ''}>Início</Link></li>
         <li><Link to="/catalogo" className={isActive('/catalogo') ? s.active : ''}>Catálogo</Link></li>
         <li><Link to="/sugestao" className={isActive('/sugestao') ? s.active : ''}>Sugestões</Link></li>
       </ul>
@@ -30,7 +29,12 @@ export default function Navbar() {
 
       <div className={s.avatarWrap}>
         <button className={s.avatar} onClick={() => setMenuAberto((v) => !v)}>
-          👤
+          <img
+            src={user?.imagem || '/avatar-default.png'}
+            alt="Usuário"
+            className={s.avatarImg}
+            onError={(e) => { e.target.src = '/avatar-default.png'; }}
+          />
         </button>
 
         {menuAberto && (

@@ -12,25 +12,25 @@ from app.core.database import Base
 class Pais(Base):
     __tablename__ = "pais"
     id_pais = Column(Integer, primary_key=True, autoincrement=True)
-    nome = Column(String(255), nullable=False, unique=True)
+    nome = Column(String(255), nullable=False)
 
 
 class Linguagem(Base):
     __tablename__ = "linguagem"
     id_linguagem = Column(Integer, primary_key=True, autoincrement=True)
-    nome = Column(String(255), nullable=False, unique=True)
+    nome = Column(String(255), nullable=False)
 
 
 class Categoria(Base):
     __tablename__ = "categoria"
     id_categoria = Column(Integer, primary_key=True, autoincrement=True)
-    nome = Column(String(255), nullable=False, unique=True)
+    nome = Column(String(255), nullable=False)
 
 
 class Produtora(Base):
     __tablename__ = "produtora"
     id_produtora = Column(Integer, primary_key=True, autoincrement=True)
-    nome = Column(String(255), nullable=False, unique=True)
+    nome = Column(String(255), nullable=False)
 
 
 # ─── Pessoas ──────────────────────────────────────────────────────────────────
@@ -38,7 +38,7 @@ class Produtora(Base):
 class Ator(Base):
     __tablename__ = "ator"
     id_ator = Column(Integer, primary_key=True, autoincrement=True)
-    nome = Column(String(255), nullable=False, unique=True)
+    nome = Column(String(255), nullable=False)
     sobrenome = Column(String(255), nullable=False)
     paises = relationship("Pais", secondary="ator_pais", viewonly=True)
 
@@ -46,7 +46,7 @@ class Ator(Base):
 class Diretor(Base):
     __tablename__ = "diretor"
     id_diretor = Column(Integer, primary_key=True, autoincrement=True)
-    nome = Column(String(255), nullable=False, unique=True)
+    nome = Column(String(255), nullable=False)
     sobrenome = Column(String(255), nullable=False)
     paises = relationship("Pais", secondary="diretor_pais", viewonly=True)
 
@@ -79,23 +79,24 @@ class ProdutoraPais(Base):
 class Filme(Base):
     __tablename__ = "filme"
     id_filme = Column(Integer, primary_key=True, autoincrement=True)
-    titulo = Column(String(255), nullable=False, unique=True)
+    titulo = Column(String(255), nullable=False)
     id_produtora_principal = Column(Integer, ForeignKey("produtora.id_produtora"))
-    id_pais_origem = Column(Integer, ForeignKey("pais.id_pais"), nullable=False)
+    id_pais_origem = Column(Integer, ForeignKey("pais.id_pais"), nullable=True)
+    classificacao = Column(String(10), nullable=True)
     orcamento = Column(Numeric(15, 2))
     duracao = Column(Time)
-    sinopse = Column(Text, unique=True)
+    sinopse = Column(Text)
     ano = Column(Integer)
-    poster = Column(String(255), unique=True)
-    banner = Column(String(255), unique=True)
-    trailer = Column(String(255), unique=True)
+    poster = Column(String(255))
+    banner = Column(String(255))
+    trailer = Column(String(255))
     # flag: True = aprovado, False = pendente
     flag = Column(Boolean, default=False)
 
     produtora_principal = relationship("Produtora")
     pais_origem = relationship("Pais", foreign_keys=[id_pais_origem])
     produtoras = relationship("Produtora", secondary="filme_produtora", viewonly=True)
-    paises = relationship("Pais", secondary="filme_pais", viewonly=True)
+    paises = relationship("Pais", secondary="filme_pais", viewonly=True, foreign_keys="[FilmePais.id_filme]")
     categorias = relationship("Categoria", secondary="filme_categoria", viewonly=True)
     atores = relationship("Ator", secondary="filme_ator", viewonly=True)
     diretores = relationship("Diretor", secondary="filme_diretor", viewonly=True)
@@ -151,7 +152,7 @@ class Usuario(Base):
     id_usuario = Column(Integer, primary_key=True, autoincrement=True)
     nome = Column(String(255), nullable=False)
     sobrenome = Column(String(255))
-    apelido = Column(String(100), unique=True)
+    apelido = Column(String(100))
     email = Column(String(255), nullable=False, unique=True)
     senha = Column(String(255), nullable=False)
     data_nascimento = Column(Date)

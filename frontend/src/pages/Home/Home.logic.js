@@ -1,61 +1,61 @@
 import { useEffect, useRef, useState } from 'react';
 
-// Grade de pôsteres do hero da Home (collage de filmes)
+// Todos os posters usam TMDB (permite hotlink, sem CORS)
 export const HERO_SLIDES = [
   {
     id: 1,
     label: 'O SUPRASSUMO DA SÉTIMA ARTE',
     posters: [
-      'https://m.media-amazon.com/images/M/MV5BMjExMjkwNTQ0Nl5BMl5BanBnXkFtZTcwNTY0OTk1Mw@@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BNTRmNTQ2M2ItMDYyYy00NWUzLTkxNGItZDUxZjgxYzRhYTdiXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BMWU4N2FjNzYtNTVkNC00NzQ0LTg0MjAtYTJlMjFhNGUxZDFmXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BNDE3ODczM2QtZmMxZS00NmNhLWJmNDMtNjUxNTQ5OTAyMzliXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BNzA5ZDJhZWMtODU5NS00N2QyLWI4NWEtNmM1ZmQ5NThjNmVlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg',
+      'https://image.tmdb.org/t3/p/w342/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg', // Fight Club
+      'https://image.tmdb.org/t3/p/w342/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg', // Pulp Fiction
+      'https://image.tmdb.org/t3/p/w342/3bhkrj58Vtu7enYsLegHzgMm3Bg.jpg', // Godfather
+      'https://image.tmdb.org/t3/p/w342/qJ2tW6WMUDux911r6m7haRef0WH.jpg', // Dark Knight
+      'https://image.tmdb.org/t3/p/w342/9cqNxx0GxF0bAY7hT7PWzOwzR3P.jpg', // Shawshank
+      'https://image.tmdb.org/t3/p/w342/ty8TGRuvJLPUmAR1H1nRIsgwvim.jpg', // Gladiador
+      'https://image.tmdb.org/t3/p/w342/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg', // Parasita
+      'https://image.tmdb.org/t3/p/w342/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg', // Interstellar
     ],
   },
   {
     id: 2,
     label: 'CLÁSSICOS IMORTAIS',
     posters: [
-      'https://m.media-amazon.com/images/M/MV5BYjRmODgyMWItMWQzOS00NTY3LWI0ZTAtMzgxYzQwODM0YmViXkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BMmEzNTkxYjQtZTc0MC00YTVjLTg5ZTEtZWMwOWVlYzY0NWIwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BOGEwYTlkNzItNjU3OC00YjU4LWI4NzEtZjBkZjFmMzQ2ZjZlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BODE0MjRhZWMtNTExMi00ZjhiLWIxOTMtODk3N2IxMzYxNDFjXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BNzM3NDFhYTAtYmU5Mi00NGRmLTljYjgtMDkyODQ4MjNkMGY2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_.jpg',
+      'https://image.tmdb.org/t3/p/w342/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg', // Forrest Gump
+      'https://image.tmdb.org/t3/p/w342/fNOH9f1aA7XRTzl1sAOx9iF553Q.jpg', // BTTF
+      'https://image.tmdb.org/t3/p/w342/oU7Oq2kFAAlGqbU4VoAE36g4hoI.jpg', // Jurassic Park
+      'https://image.tmdb.org/t3/p/w342/ceG9VzoRAVGwivFU403Wc3AHRys.jpg', // Indiana Jones
+      'https://image.tmdb.org/t3/p/w342/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg', // Titanic
+      'https://image.tmdb.org/t3/p/w342/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg', // LOTR 1
+      'https://image.tmdb.org/t3/p/w342/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg', // LOTR 3
+      'https://image.tmdb.org/t3/p/w342/uS9m8OBk1A8eM9I042bx8XXpqAq.jpg', // Silence of Lambs
     ],
   },
   {
     id: 3,
     label: 'AÇÃO E ADRENALINA',
     posters: [
-      'https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BODEzNjczODgxMV5BMl5BanBnXkFtZTgwOTM1NDQ1ODE@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtYThjOTZiZjhhN2Q2XkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BMTQxOTc3NTMxMV5BMl5BanBnXkFtZTcwNzI4MDg2Mg@@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BMTMwMDg3NDkxNF5BMl5BanBnXkFtZTcwODM1ODgyMQ@@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BMTQ5NjQ1NDI3Ml5BMl5BanBnXkFtZTcwNDI4MDg2Mg@@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BNWVhZWFkZGItNmZkNS00MzYyLThjNzYtZjI2YWMxNmEzYWQzXkEyXkFqcGdeQXVyMzI2MDEwNA@@._V1_.jpg',
+      'https://image.tmdb.org/t3/p/w342/78lPtwv72eTNqFW9COBF8l5eB8z.jpg', // Iron Man
+      'https://image.tmdb.org/t3/p/w342/or06FN3Dka5tukK1e9sl16pB3iy.jpg', // Avengers Endgame
+      'https://image.tmdb.org/t3/p/w342/fZPSd91vlGBP4PiExaFRtygULdN.jpg', // John Wick
+      'https://image.tmdb.org/t3/p/w342/qvktm0BHcnmDpAB5q0bOvL4qEOC.jpg', // Terminator
+      'https://image.tmdb.org/t3/p/w342/ty8TGRuvJLPUmAR1H1nRIsgwvim.jpg', // Gladiador
+      'https://image.tmdb.org/t3/p/w342/74xTEgt7R36Fpooo50r9T25onhq.jpg', // The Batman
+      'https://image.tmdb.org/t3/p/w342/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg', // Guardians
+      'https://image.tmdb.org/t3/p/w342/y1GJoRWGaMvgpkJy3Rl8Bc4LGZW.jpg', // Tropa de Elite
     ],
   },
   {
     id: 4,
     label: 'FICÇÃO CIENTÍFICA',
     posters: [
-      'https://m.media-amazon.com/images/M/MV5BNzA1Njg4NzYxOV5BMl5BanBnXkFtZTgwODk5NjU3MzI@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVlLTM5YTctMTMwN2YwNzZlMDZhXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMjkwMjY4NjE@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BOTA5NjhiOTAtZWM0ZC00MWNhLThiMzEtZDFkOTk2OTU1ZTJlXkEyXkFqcGdeQXVyMTA4NDI1NTQx._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BMzY2MDk5NDgtOWQ1My00YzBlLWJlMzMtMDkzNmI5ZmFjMzI5XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5NS00YjQ4LWI4YTgtODE0NWZiYWFkNzM3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_.jpg',
-      'https://m.media-amazon.com/images/M/MV5BMTk2NTI1MTU4N15BMl5BanBnXkFtZTcwODA4MDg2Mg@@._V1_.jpg',
+      'https://image.tmdb.org/t3/p/w342/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg', // Interstellar
+      'https://image.tmdb.org/t3/p/w342/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg', // Matrix
+      'https://image.tmdb.org/t3/p/w342/d5NXSklpcvkCmqKOue0sBPxBPdG.jpg', // Duna
+      'https://image.tmdb.org/t3/p/w342/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg', // Duna 2
+      'https://image.tmdb.org/t3/p/w342/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg', // Blade Runner 2049
+      'https://image.tmdb.org/t3/p/w342/ve72VxNqsuEngP0Ity4SB6K8QDBT.jpg', // 2001
+      'https://image.tmdb.org/t3/p/w342/hbhFnRzzg6ZDmm8YAmxBnQpQIPh.jpg', // WALL-E
+      'https://image.tmdb.org/t3/p/w342/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg', // Oppenheimer
     ],
   },
 ];
@@ -65,19 +65,19 @@ export const NOTICIAS = [
     id: 1,
     titulo: 'Homem-Aranha: Além do Aranhaverso Adiado novamente?',
     texto: 'O lançamento de Homem-Aranha: Além do Aranhaverso foi adiado de março de 2024 para o dia 18 de junho de 2027. Essa mudança ocorreu principalmente devido aos atrasos causados pelas greves em Hollywood e...',
-    imagem: 'https://m.media-amazon.com/images/M/MV5BMzI0NmVkMjEtYmY4MS00ZDMxLTlkZmEtMzU4MDQxYTMzMjU2XkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_.jpg',
+    imagem: 'https://image.tmdb.org/t3/p/w300/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg',
   },
   {
     id: 2,
     titulo: 'Estrelas de Hollywood assinam carta aberta contra fusão de Paramount e Warner Bros.',
     texto: 'Mais de mil cineastas, atores e profissionais do setor assinaram uma carta aberta em oposição à proposta de fusão de US$ 110 bilhões da Warner Bros. Discovery com a Paramount Skydance, alertando que ela reduziria a concorrência e ...',
-    imagem: 'https://cdn.pipocamoderna.com.br/wp-content/uploads/2025/09/Paramount-Warner-Bros-water-tower.jpg.webp',
+    imagem: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Warner_Bros._Archives.jpg/640px-Warner_Bros._Archives.jpg',
   },
   {
     id: 3,
     titulo: "Personagem icônico é confirmado em 'Todo Mundo em Pânico 6'",
     texto: "Poucas semanas após os irmãos Keenen, Shawn e Marlon Wayans serem confirmados no sexto filme de 'Todo Mundo em Pânico', o projeto voltou a receber atualizações. Em entrevista ao canal do Youtube Crazydog500, Dave Sheridan ('O Pequenino'), ...",
-    imagem: 'https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/10/todo-mundo-em-panico-e1730323839101.jpg?w=1080&h=608&crop=1',
+    imagem: 'https://image.tmdb.org/t3/p/w300/tQK2ForYzFCJvsT16YAsUhlvIwD.jpg',
   },
 ];
 
