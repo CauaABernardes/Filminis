@@ -35,7 +35,6 @@ def register(body: UsuarioCreate, db: Session = Depends(get_db)):
     db.refresh(user)
     return user
 
-
 @router.post("/login", response_model=TokenOut)
 def login(body: LoginIn, db: Session = Depends(get_db)):
     user = db.query(Usuario).filter(Usuario.email == body.email).first()
@@ -46,7 +45,6 @@ def login(body: LoginIn, db: Session = Depends(get_db)):
         access_token=create_access_token(user.id_usuario, user.role),
         refresh_token=create_refresh_token(user.id_usuario),
     )
-
 
 @router.post("/refresh", response_model=TokenOut)
 def refresh(body: RefreshIn, db: Session = Depends(get_db)):
@@ -71,7 +69,6 @@ def refresh(body: RefreshIn, db: Session = Depends(get_db)):
         access_token=create_access_token(user.id_usuario, user.role),
         refresh_token=create_refresh_token(user.id_usuario),
     )
-
 
 @router.post("/logout", response_model=MsgOut)
 def logout(body: RefreshIn, db: Session = Depends(get_db)):

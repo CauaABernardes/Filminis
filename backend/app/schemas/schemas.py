@@ -14,36 +14,30 @@ class IdNome(BaseModel):
     id: int
     nome: str
 
-
 class PaisOut(BaseModel):
     model_config = {"from_attributes": True}
     id_pais: int
     nome: str
-
 
 class GeneroOut(BaseModel):
     model_config = {"from_attributes": True}
     id_genero: int
     nome: str
 
-
 class LinguagemOut(BaseModel):
     model_config = {"from_attributes": True}
     id_linguagem: int
     nome: str
-
 
 class CategoriaOut(BaseModel):
     model_config = {"from_attributes": True}
     id_categoria: int
     nome: str
 
-
 class ProdutoraOut(BaseModel):
     model_config = {"from_attributes": True}
     id_produtora: int
     nome: str
-
 
 # ─── Ator / Diretor ───────────────────────────────────────────────────────────
 
@@ -53,39 +47,33 @@ class AtorOut(BaseModel):
     nome: str
     sobrenome: str
 
-
 class DiretorOut(BaseModel):
     model_config = {"from_attributes": True}
     id_diretor: int
     nome: str
     sobrenome: str
 
-
 # ─── Filme ────────────────────────────────────────────────────────────────────
 
 class FilmeBase(BaseModel):
     titulo: str
     orcamento: Optional[Decimal] = None
-    duracao: Optional[str] = None
+    duracao: Optional[str] = None          # "HH:MM" ou "HH:MM:SS"
     sinopse: Optional[str] = None
     ano: Optional[int] = None
     poster: Optional[str] = None
     banner: Optional[str] = None
     trailer: Optional[str] = None
-    classificacao: Optional[str] = None
-
 
 class FilmeCreate(FilmeBase):
     id_produtora_principal: Optional[int] = None
     id_pais_origem: Optional[int] = None
-    classificacao: Optional[str] = None
     ids_produtoras: List[int] = []
     ids_paises: List[int] = []
     ids_categorias: List[int] = []
     ids_atores: List[int] = []
     ids_diretores: List[int] = []
     ids_linguagens: List[int] = []
-
 
 class FilmeUpdate(BaseModel):
     """Todos os campos opcionais para PATCH."""
@@ -97,7 +85,6 @@ class FilmeUpdate(BaseModel):
     poster: Optional[str] = None
     banner: Optional[str] = None
     trailer: Optional[str] = None
-    classificacao: Optional[str] = None
     id_produtora_principal: Optional[int] = None
     id_pais_origem: Optional[int] = None
     ids_produtoras: Optional[List[int]] = None
@@ -106,7 +93,6 @@ class FilmeUpdate(BaseModel):
     ids_atores: Optional[List[int]] = None
     ids_diretores: Optional[List[int]] = None
     ids_linguagens: Optional[List[int]] = None
-
 
 class FilmeOut(BaseModel):
     model_config = {"from_attributes": True}
@@ -119,7 +105,6 @@ class FilmeOut(BaseModel):
     poster: Optional[str]
     banner: Optional[str]
     trailer: Optional[str]
-    classificacao: Optional[str]
     flag: Optional[bool]
     pais_origem: Optional[PaisOut] = None
     produtoras: List[ProdutoraOut] = []
@@ -129,7 +114,6 @@ class FilmeOut(BaseModel):
     diretores: List[DiretorOut] = []
     linguagens: List[LinguagemOut] = []
 
-
 class FilmeListOut(BaseModel):
     """Versão resumida para listagem."""
     model_config = {"from_attributes": True}
@@ -138,8 +122,8 @@ class FilmeListOut(BaseModel):
     ano: Optional[int]
     poster: Optional[str]
     flag: Optional[bool]
+    pais_origem: Optional[PaisOut] = None
     categorias: List[CategoriaOut] = []
-
 
 # ─── Usuário ──────────────────────────────────────────────────────────────────
 
@@ -159,7 +143,6 @@ class UsuarioCreate(BaseModel):
             raise ValueError("Senha deve ter ao menos 6 caracteres")
         return v
 
-
 class UsuarioUpdate(BaseModel):
     nome: Optional[str] = None
     sobrenome: Optional[str] = None
@@ -167,7 +150,6 @@ class UsuarioUpdate(BaseModel):
     data_nascimento: Optional[date] = None
     imagem: Optional[str] = None
     senha: Optional[str] = None
-
 
 class UsuarioOut(BaseModel):
     model_config = {"from_attributes": True}
@@ -191,23 +173,19 @@ class RoleUpdate(BaseModel):
             raise ValueError("role deve ser 'admin' ou 'user'")
         return v
 
-
 # ─── Auth ─────────────────────────────────────────────────────────────────────
 
 class LoginIn(BaseModel):
     email: EmailStr
     senha: str
 
-
 class TokenOut(BaseModel):
     access_token: str
     refresh_token: str
     token_type: str = "bearer"
 
-
 class RefreshIn(BaseModel):
     refresh_token: str
-
 
 class MsgOut(BaseModel):
     detail: str

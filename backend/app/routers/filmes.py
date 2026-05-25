@@ -15,7 +15,6 @@ from app.schemas.schemas import FilmeCreate, FilmeListOut, FilmeOut, FilmeUpdate
 
 router = APIRouter(prefix="/filmes", tags=["Filmes"])
 
-
 # ─── helpers ──────────────────────────────────────────────────────────────────
 
 def _parse_duracao(s: Optional[str]) -> Optional[dt_time]:
@@ -28,7 +27,6 @@ def _parse_duracao(s: Optional[str]) -> Optional[dt_time]:
         return dt_time(h, m, sec)
     except Exception:
         raise HTTPException(status_code=422, detail=f"Formato de duração inválido: '{s}'. Use HH:MM ou HH:MM:SS")
-
 
 def _set_relations(db: Session, filme: Filme, data: dict):
     """Atualiza todas as tabelas N:N do filme."""
@@ -51,13 +49,11 @@ def _set_relations(db: Session, filme: Filme, data: dict):
         for fk_id in ids:
             db.add(Model(**{fk_filme: filme.id_filme, fk_col: fk_id}))
 
-
 def _get_or_404(db: Session, filme_id: int) -> Filme:
     f = db.get(Filme, filme_id)
     if not f:
         raise HTTPException(status_code=404, detail="Filme não encontrado")
     return f
-
 
 # ─── Rotas públicas ───────────────────────────────────────────────────────────
 
@@ -102,7 +98,6 @@ def list_filmes(
 
     return q.offset(skip).limit(limit).all()
 
-
 @router.get("/pendentes", response_model=List[FilmeListOut])
 def list_pendentes(
     db: Session = Depends(get_db),
@@ -114,7 +109,6 @@ def list_pendentes(
 @router.get("/{filme_id}", response_model=FilmeOut)
 def get_filme(filme_id: int, db: Session = Depends(get_db)):
     return _get_or_404(db, filme_id)
-
 
 # ─── Rotas autenticadas ───────────────────────────────────────────────────────
 
@@ -128,8 +122,6 @@ def create_filme(
     filme = Filme(
         titulo=data["titulo"],
         id_produtora_principal=data.get("id_produtora_principal"),
-        id_pais_origem=data.get("id_pais_origem"),
-        classificacao=data.get("classificacao"),
         orcamento=data.get("orcamento"),
         duracao=_parse_duracao(data.get("duracao")),
         sinopse=data.get("sinopse"),
@@ -137,7 +129,7 @@ def create_filme(
         poster=data.get("poster"),
         banner=data.get("banner"),
         trailer=data.get("trailer"),
-        flag=False,
+        flag=False,  # aguarda aprovação do admin
     )
     db.add(filme)
     db.flush()  # obtém id_filme antes do commit
@@ -146,7 +138,6 @@ def create_filme(
     db.commit()
     db.refresh(filme)
     return filme
-
 
 @router.patch("/{filme_id}", response_model=FilmeOut)
 def update_filme(
@@ -158,7 +149,7 @@ def update_filme(
     filme = _get_or_404(db, filme_id)
     data = body.model_dump(exclude_none=True)
 
-    scalar_fields = {"titulo", "orcamento", "sinopse", "ano", "poster", "banner", "trailer", "id_produtora_principal", "id_pais_origem", "classificacao"}
+    scalar_fields = {"titulo", "orcamento", "sinopse", "ano", "poster", "banner", "trailer", "id_produtora_principal"}
     for field in scalar_fields:
         if field in data:
             setattr(filme, field, data[field])
@@ -171,7 +162,6 @@ def update_filme(
     db.refresh(filme)
     return filme
 
-
 @router.put("/{filme_id}/aprovar", response_model=FilmeOut)
 def aprovar_filme(
     filme_id: int,
@@ -183,7 +173,6 @@ def aprovar_filme(
     db.commit()
     db.refresh(filme)
     return filme
-
 
 @router.delete("/{filme_id}", response_model=MsgOut)
 def delete_filme(
