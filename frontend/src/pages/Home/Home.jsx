@@ -41,16 +41,18 @@ export default function Home() {
 
         {/* Notícias */}
         <h2 className={s.secTitle}>Notícias</h2>
-        {NOTICIAS.map((n) => (
-          <div key={n.id} className={s.noticia}>
-            <img className={s.noticiaImg} src={n.imagem} alt={n.titulo} />
-            <div className={s.noticiaBody}>
-              <h3>{n.titulo}</h3>
-              <p>{n.texto}</p>
-              <span className={s.lerMais}>Ler Mais +</span>
+        <div className={s.noticias}>
+          {NOTICIAS.map((n) => (
+            <div key={n.id} className={s.noticia}>
+              <img className={s.noticiaImg} src={n.imagem} alt={n.titulo} />
+              <div className={s.noticiaBody}>
+                <h3>{n.titulo}</h3>
+                <p>{n.texto}</p>
+                <span className={s.lerMais}>Ler Mais +</span>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       <Footer />

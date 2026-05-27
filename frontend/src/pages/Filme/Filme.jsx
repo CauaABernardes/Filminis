@@ -15,39 +15,40 @@ export default function Filme() {
     <div className={s.page}>
       <Navbar />
 
-      {/* Banner */}
-      {filme.banner
-        ? <img className={s.banner} src={filme.banner} alt={filme.titulo} />
-        : filme.poster
-          ? <img className={s.banner} src={filme.poster} alt={filme.titulo} style={{ objectPosition: 'top' }} />
-          : <div className={s.bannerPlaceholder}>🎬</div>
-      }
-
-      {/* Barra de título */}
-      <div className={s.tituloBar}>
-        <h1>{filme.titulo}</h1>
-        {bandeirasArr[0] && (
-          <span className={s.bandeiraPrincipal}>{getBandeira(bandeirasArr[0].nome)}</span>
-        )}
-        {filme.classificacao && (
-          <span className={s.classificacao}>{filme.classificacao}</span>
-        )}
-      </div>
+      {/* Banner + título sobrepostos */}
+      <div className={s.bannerWrap}>
+        {filme.banner
+          ? <img className={s.banner} src={filme.banner} alt={filme.titulo} />
+          : filme.poster
+            ? <img className={s.banner} src={filme.poster} alt={filme.titulo} />
+            : <div className={s.bannerPlaceholder}>🎬</div>
+        }
+        <div className={s.tituloBar}>
+          <h1>{filme.titulo}</h1>
+          <div className={s.tituloRight}>
+            {bandeirasArr[0] && (
+              <span className={s.bandeiraPrincipal}>{getBandeira(bandeirasArr[0].nome)}</span>
+            )}
+            {filme.classificacao && (
+              <span className={s.classificacao}>{filme.classificacao}</span>
+            )}
+          </div>
+        </div>
+      </div>  
 
       {/* Trailer */}
       <div className={s.trailerWrap}>
         {youtubeId ? (
           <iframe
             className={s.trailerFrame}
-            src={`https://www.youtube-nocookie.com/embed/${youtubeId}?rel=0&modestbranding=1`}
+            src={`https://www.youtube.com/embed/${youtubeId}`}
             title="Trailer"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            referrerPolicy="strict-origin-when-cross-origin"
           />
         ) : (
           <div className={s.trailerPlaceholder}>
-            <span style={{color:'var(--muted)', fontSize:'0.9rem'}}>Trailer não disponível</span>
+            <button className={s.playBtn}>▶</button>
           </div>
         )}
       </div>
