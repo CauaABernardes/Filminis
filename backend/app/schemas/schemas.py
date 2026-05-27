@@ -187,5 +187,19 @@ class TokenOut(BaseModel):
 class RefreshIn(BaseModel):
     refresh_token: str
 
+
+# ─── Destaques da Home ────────────────────────────────────────────────────────
+
+class DestaqueHomeOut(BaseModel):
+    model_config = {"from_attributes": True}
+    id: int
+    ordem: int
+    filme: FilmeListOut
+
+class DestaqueHomeSet(BaseModel):
+    """Lista ordenada de ids de filmes para salvar como destaques."""
+    ids_filmes: List[int]
+
+
 class MsgOut(BaseModel):
     detail: str

@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.database import Base, engine
 from app.models import models  # garante que os models sejam registrados
-from app.routers import auth, dados, filmes, usuarios
+from app.routers import auth, dados, filmes, home, usuarios
 
 # Cria tabelas que ainda não existem (não altera as existentes)
 Base.metadata.create_all(bind=engine)
@@ -26,6 +26,7 @@ app.include_router(auth.router)
 app.include_router(usuarios.router)
 app.include_router(filmes.router)
 app.include_router(dados.router)
+app.include_router(home.router)
 
 
 @app.get("/", tags=["Health"])

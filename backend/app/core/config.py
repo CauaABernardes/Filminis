@@ -1,6 +1,5 @@
 from pydantic_settings import BaseSettings
 
-
 class Settings(BaseSettings):
     DB_HOST: str = "localhost"
     DB_PORT: int = 3306
@@ -20,7 +19,7 @@ class Settings(BaseSettings):
             f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
         )
 
-    model_config = {"env_file": ".env"}
+    model_config = {"env_file": ".venv"}
 
 
 settings = Settings()

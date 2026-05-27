@@ -100,6 +100,16 @@ Documentação interativa (Swagger): **http://localhost:8000/docs**
 
 ---
 
+### 7. Atulizando o Banco
+
+Com o Alembic já configurado rode o seguinte comando:
+
+```bash
+alembic revision --autogenerate -m "criando tabelas"  
+```
+
+E ele já irá atualizar/criar tabelas do seu banco
+
 ## Estrutura do projeto
 
 ```

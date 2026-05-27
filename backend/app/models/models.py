@@ -1,10 +1,10 @@
 from sqlalchemy import (
     Boolean, Column, Date, DateTime, Enum, ForeignKey,
-    Integer, Numeric, String, Text, Time, func,
+    Integer, Numeric, String, Text, Time, func, create_engine
 )
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, sessionmaker
 
-from app.core.database import Base
+from app.core.database import Base, engine
 
 
 # ─── Tabelas auxiliares ───────────────────────────────────────────────────────
@@ -160,6 +160,16 @@ class Usuario(Base):
     data_criacao = Column(DateTime, default=func.now())
 
 
+# ─── Destaques da Home ────────────────────────────────────────────────────────
+
+class DestaqueHome(Base):
+    __tablename__ = "destaque_home"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    id_filme = Column(Integer, ForeignKey("filme.id_filme"), nullable=False, unique=True)
+    ordem = Column(Integer, nullable=False, default=0)
+    filme = relationship("Filme")
+
+
 # ─── Refresh token blacklist ──────────────────────────────────────────────────
 
 class RefreshTokenBlacklist(Base):
@@ -167,3 +177,6 @@ class RefreshTokenBlacklist(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     token = Column(String(512), nullable=False, unique=True)
     criado_em = Column(DateTime, default=func.now())
+
+
+Base.metadata.create_all(bind=engine)
