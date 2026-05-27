@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { homeService } from '../../services/api';
 
 // Grade de pôsteres do hero da Home (collage de filmes)
 export const HERO_SLIDES = [
@@ -80,6 +81,21 @@ export const NOTICIAS = [
     imagem: 'https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/10/todo-mundo-em-panico-e1730323839101.jpg?w=1080&h=608&crop=1',
   },
 ];
+
+// Hook que busca os destaques da Home da API
+export function useDestaques() {
+  const [filmes, setFilmes] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    homeService.destaques()
+      .then(({ data }) => setFilmes(data.map((d) => d.filme)))
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
+
+  return { filmes, loading };
+}
 
 export function useHome() {
   const [slide, setSlide] = useState(0);

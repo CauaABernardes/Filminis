@@ -2,7 +2,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import CarrosselSecao from '../../components/CarrosselSecao/CarrosselSecao';
 import s from './Home.module.css';
-import { HERO_SLIDES, NOTICIAS, useHome } from './Home.logic';
+import { HERO_SLIDES, NOTICIAS, useHome, useDestaques } from './Home.logic';
 
 export default function Home() {
   const { slide, setSlide, prev, next } = useHome();
@@ -37,7 +37,7 @@ export default function Home() {
 
       <div className={s.content}>
         <CarrosselSecao titulo="Próximos Lançamentos"    params={{ limit: 20 }} filtroUrl="/filmes" />
-        <CarrosselSecao titulo="Adicionados Recentemente" params={{ limit: 20 }} filtroUrl="/filmes" />
+        <CarrosselSecao titulo="Adicionados Recentemente" params={{ limit: 10 }} filtroUrl="/filmes" />
 
         {/* Notícias */}
         <h2 className={s.secTitle}>Notícias</h2>

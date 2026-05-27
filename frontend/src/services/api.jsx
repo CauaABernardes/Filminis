@@ -62,4 +62,10 @@ export const usuariosService = {
   alterarRole: (id, role)  => api.patch(`/usuarios/${id}/role`, { role }),
 };
 
+export const homeService = {
+  destaques:       ()           => api.get('/home/destaques'),
+  salvarDestaques: (ids_filmes) => api.put('/home/destaques', { ids_filmes }),
+  limparDestaques: ()           => api.delete('/home/destaques'),
+};
+
 export default api;
