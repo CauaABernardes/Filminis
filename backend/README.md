@@ -9,14 +9,16 @@ Backend do gerenciador de filmes **Filminis**, desenvolvido como projeto avaliat
 | Tecnologia | Versão | Função |
 |---|---|---|
 | Python | 3.11+ | Linguagem principal |
-| FastAPI | 0.115 | Framework web / REST API |
-| SQLAlchemy | 2.0 | ORM |
+| FastAPI | 0.136.1 | Framework web / REST API |
+| SQLAlchemy | 2.0.49 | ORM |
+| Alembic | 1.18.4 | Migrations de banco de dados |
 | MySQL | 8.0+ | Banco de dados |
-| PyMySQL | 1.1 | Driver MySQL para Python |
-| python-jose | 3.3 | Geração e validação de JWT |
-| passlib + bcrypt | 1.7 | Hash seguro de senhas |
-| Pydantic v2 | 2.10 | Validação de dados / schemas |
-| Uvicorn | 0.34 | Servidor ASGI |
+| PyMySQL | 1.1.3 | Driver MySQL para Python |
+| python-jose | 3.5.0 | Geração e validação de JWT |
+| passlib + bcrypt | 1.7.4 + 5.0.0 | Hash seguro de senhas |
+| Pydantic v2 | 2.13.4 | Validação de dados / schemas |
+| python-dotenv | 1.2.2 | Leitura do arquivo `.env` |
+| Uvicorn | 0.46.0 | Servidor ASGI |
 
 ---
 
@@ -33,14 +35,15 @@ Backend do gerenciador de filmes **Filminis**, desenvolvido como projeto avaliat
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/<seu-usuario>/filminis-back.git
-cd filminis-back
+git clone https://github.com/<seu-usuario>/filminis.git
+cd filminis
+cd backend
 ```
 
 ### 2. Crie e ative um ambiente virtual
 
 ```bash
-python -m venv venv
+python -m venv .venv
 
 # Linux / macOS
 source venv/bin/activate
@@ -68,12 +71,12 @@ mysql -u root -p < filminis-DDL-DML.sql
 Copie o arquivo de exemplo e edite com seus dados:
 
 ```bash
-cp .env.example .env
+cp .venv.example .venv
 ```
 
-Edite o `.env`:
+Edite o `.venv`:
 
-```env
+```venv
 DB_HOST=localhost
 DB_PORT=3306
 DB_USER=root
@@ -100,15 +103,36 @@ Documentação interativa (Swagger): **http://localhost:8000/docs**
 
 ---
 
-### 7. Atulizando o Banco
+### 7. Atualizando o banco com Alembic
 
-Com o Alembic já configurado rode o seguinte comando:
+Com o Alembic já configurado, use os comandos abaixo sempre que alterar os models:
+
+**Gerar uma nova migration (detecta alterações automaticamente):**
 
 ```bash
-alembic revision --autogenerate -m "criando tabelas"  
+alembic revision --autogenerate -m "descricao_da_alteracao"
 ```
 
-E ele já irá atualizar/criar tabelas do seu banco
+**Aplicar as migrations pendentes ao banco:**
+
+```bash
+alembic upgrade head
+```
+
+**Outros comandos úteis:**
+
+```bash
+# Ver o histórico de migrations
+alembic history
+
+# Ver qual migration está aplicada atualmente
+alembic current
+
+# Reverter a última migration
+alembic downgrade -1
+```
+
+> **Importante:** o `--autogenerate` apenas *gera* o arquivo de migration — ele não altera o banco. Sempre rode `alembic upgrade head` depois para aplicar as mudanças.
 
 ## Estrutura do projeto
 
@@ -116,6 +140,10 @@ E ele já irá atualizar/criar tabelas do seu banco
 filminis-back/
 ├── app/
 │   ├── main.py                  # Ponto de entrada da aplicação
+│   ├── alembic.ini              # Configuração do Alembic
+│   ├── alembic/
+│   │   ├── env.py               # Ambiente de migrations
+│   │   └── versions/            # Arquivos de migration gerados
 │   ├── core/
 │   │   ├── config.py            # Configurações (env vars)
 │   │   ├── database.py          # Conexão SQLAlchemy + get_db
@@ -127,6 +155,7 @@ filminis-back/
 │   ├── routers/
 │   │   ├── auth.py              # /auth/register, /auth/login, /auth/refresh, /auth/logout
 │   │   ├── filmes.py            # CRUD de filmes
+│   │   ├── home.py              # /home/destaques — destaques da página inicial
 │   │   ├── usuarios.py          # Perfil e administração de usuários
 │   │   └── dados.py             # Dados auxiliares (países, categorias, atores...)
 │   └── dependencies/
@@ -191,6 +220,22 @@ filminis-back/
 | GET | `/dados/produtoras` | Lista produtoras |
 | GET | `/dados/atores` | Lista atores |
 | GET | `/dados/diretores` | Lista diretores |
+
+### Home / Destaques
+
+| Método | Rota | Descrição | Auth |
+|---|---|---|---|
+| GET | `/home/destaques` | Lista os filmes em destaque ordenados | Público |
+| PUT | `/home/destaques` | Substitui todos os destaques pela lista enviada | Admin |
+| DELETE | `/home/destaques` | Remove todos os destaques | Admin |
+
+**Body de PUT `/home/destaques`:**
+```json
+{
+  "ids_filmes": [3, 7, 1, 12]
+}
+```
+> A ordem dos IDs define a ordem de exibição. Todos os IDs devem corresponder a filmes existentes.
 
 ---
 
