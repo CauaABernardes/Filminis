@@ -4,10 +4,10 @@ import { dadosService } from '../../services/api';
 export const RECOMENDADOS_SLIDES = [
   {
     id: 1,
-    poster: 'https://m.media-amazon.com/images/M/MV5BYjRmODgyMWItMWQzOS00NTY3LWI0ZTAtMzgxYzQwODM0YmViXkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_.jpg',
+    poster: 'https://m.media-amazon.com/images/I/71aUk31E66L._AC_UF894,1000_QL80_.jpg',
     titulo: 'Raging Bull',
     quote: '"puta que pariu" - senhor cinema',
-    diretor: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Martin_Scorsese_2010.jpg/440px-Martin_Scorsese_2010.jpg',
+    diretor: 'https://pbs.twimg.com/media/GqmDJ75W4AACybr.jpg',
   },
   {
     id: 2,
@@ -18,14 +18,14 @@ export const RECOMENDADOS_SLIDES = [
   },
   {
     id: 3,
-    poster: 'https://m.media-amazon.com/images/M/MV5BNmU5ZGNjODMtMTMwYy00YTZlLTg3ZTgtMzg4ZGU1NmMwZTNiXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg',
+    poster: 'https://http2.mlstatic.com/D_NQ_NP_650968-MLB44581055989_012021-O.webp',
     titulo: 'Tropa de Elite',
     quote: '"cinema nacional no seu melhor"',
     diretor: null,
   },
   {
     id: 4,
-    poster: 'https://m.media-amazon.com/images/M/MV5BMTc5OTk4MTM3MV5BMl5BanBnXkFtZTgwODcxNjg3MDE@._V1_.jpg',
+    poster: 'https://sala7design.com.br/wp-content/uploads/2014/11/Alternative-Posters-of-Interstellar_0.jpeg',
     titulo: 'Interestelar',
     quote: '"épico e emocionante"',
     diretor: null,
