@@ -65,7 +65,9 @@ def list_filmes(
     ator: Optional[int] = Query(None, description="id_ator"),
     diretor: Optional[int] = Query(None, description="id_diretor"),
     pais: Optional[int] = Query(None, description="id_pais"),
+    produtora: Optional[int] = Query(None, description="id_produtora"),
     aprovados: bool = Query(True, description="False = pendentes (só admin)"),
+    recentes: bool = Query(False, description="True = ordena por ano DESC"),
     skip: int = Query(0, ge=0),
     limit: int = Query(20, ge=1, le=100),
     db: Session = Depends(get_db),
@@ -95,6 +97,11 @@ def list_filmes(
         q = q.join(FilmePais, FilmePais.id_filme == Filme.id_filme).filter(
             FilmePais.id_pais == pais
         )
+    if produtora:
+        q = q.filter(Filme.id_produtora_principal == produtora)
+
+    if recentes:
+        q = q.order_by(Filme.ano.desc())
 
     return q.offset(skip).limit(limit).all()
 

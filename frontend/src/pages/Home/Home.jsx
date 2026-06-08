@@ -6,6 +6,7 @@ import { HERO_SLIDES, NOTICIAS, useHome, useDestaques } from './Home.logic';
 
 export default function Home() {
   const { slide, setSlide, prev, next } = useHome();
+  const { filmes: destaques, loading: loadingDestaques } = useDestaques(); // ← LINHA ADICIONADA
 
   return (
     <div className={s.page}>
@@ -36,8 +37,13 @@ export default function Home() {
       </div>
 
       <div className={s.content}>
+
+        {/* Destaques da Home — busca da API */}
+        {!loadingDestaques && destaques.length > 0 && (
+          <CarrosselSecao titulo="Destaques" filmes={destaques} filtroUrl="/filmes"/>
+        )}
+
         <CarrosselSecao titulo="Próximos Lançamentos"    params={{ limit: 20 }} filtroUrl="/filmes" />
-        <CarrosselSecao titulo="Adicionados Recentemente" params={{ limit: 10 }} filtroUrl="/filmes" />
 
         {/* Notícias */}
         <h2 className={s.secTitle}>Notícias</h2>

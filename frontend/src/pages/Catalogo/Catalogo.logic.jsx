@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { dadosService } from '../../services/api';
 
-// Slides do carrossel com cortinas (hardcoded como no Figma)
 export const RECOMENDADOS_SLIDES = [
   {
     id: 1,
@@ -33,16 +32,15 @@ export const RECOMENDADOS_SLIDES = [
   },
 ];
 
-// Seções dinâmicas do catálogo — mapeadas por nome de categoria/produtora
 const SECOES_CONFIG = [
-  { titulo: 'Recomendados do Sr. Cinema', categorias: ['Drama', 'Crime'] },
-  { titulo: 'Melhores Obras Audiovisuais', categorias: ['Drama', 'Ficção Científica'] },
-  { titulo: 'Universo Marvel',             produtoras: ['Marvel Studios'] },
-  { titulo: 'Universo DC',                 produtoras: ['Warner Bros.'] },
-  { titulo: 'Animações',                   categorias: ['Animação'] },
-  { titulo: 'Terror & Suspense',           categorias: ['Terror'] },
-  { titulo: 'Adicionados Recentemente',    params: { limit: 20 } },
-  { titulo: 'Próximos Lançamentos',        params: { limit: 10 } },
+  { titulo: 'Recomendados do Sr. Cinema',   categorias: ['Drama', 'Crime'] },
+  { titulo: 'Melhores Obras Audiovisuais',  categorias: ['Drama', 'Ficção Científica'] },
+  { titulo: 'Universo Marvel',              produtora_principal: 'Marvel Studios' },
+  { titulo: 'Universo DC',                  produtora_principal: 'DC Studios' },
+  { titulo: 'Animações',                    categorias: ['Animação'] },
+  { titulo: 'Terror & Suspense',            categorias: ['Terror'] },
+  { titulo: 'Adicionados Recentemente',     params: { limit: 10, recentes: true } },
+  { titulo: 'Próximos Lançamentos',         params: { limit: 10 } },
 ];
 
 export function useCatalogo() {
@@ -63,17 +61,22 @@ export function useCatalogo() {
 
         const montadas = SECOES_CONFIG.map((cfg) => {
           const params = { limit: 20, aprovados: true };
+
           if (cfg.categorias) {
             const id = cats.find((c) => cfg.categorias.includes(c.nome))?.id_categoria;
-            if (id) params.categoria = id;
+            if (!id) return null; // categoria não encontrada no banco, omite seção
+            params.categoria = id;
           }
-          if (cfg.produtoras) {
-            const id = prods.find((p) => cfg.produtoras.includes(p.nome))?.id_produtora;
-            if (id) params.produtora = id;
+
+          if (cfg.produtora_principal) {
+            const id = prods.find((p) => p.nome === cfg.produtora_principal)?.id_produtora;
+            if (!id) return null; // produtora não encontrada no banco, omite seção
+            params.produtora = id;
           }
+
           if (cfg.params) Object.assign(params, cfg.params);
           return { titulo: cfg.titulo, params };
-        });
+        }).filter(Boolean); // remove seções sem match
 
         setSecoes(montadas);
       })
