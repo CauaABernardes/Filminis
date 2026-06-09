@@ -30,7 +30,15 @@ export default function Navbar() {
 
       <div className={s.avatarWrap}>
         <button className={s.avatar} onClick={() => setMenuAberto((v) => !v)}>
-          👤
+          {user?.imagem ? (
+            <img src={user.imagem} alt={user.nome} className={s.avatarImg} />
+          ) : user ? (
+            <span className={s.avatarInitials}>
+              {user.nome?.charAt(0).toUpperCase()}
+            </span>
+          ) : (
+            '👤'
+          )}
         </button>
 
         {menuAberto && (
