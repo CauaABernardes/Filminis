@@ -1,0 +1,345 @@
+.page { min-height: 100vh; }
+
+.inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+}
+
+.pageTitle {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.pageSubtitle {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 36px;
+}
+
+.section { margin-bottom: 28px; }
+
+.field { margin-bottom: 18px; }
+
+.label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.required { color: var(--blue); }
+
+.input {
+  width: 100%;
+  padding: 11px 14px;
+  background: var(--blue-input);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius);
+  color: #1a2b3c;
+  font-size: 0.92rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.input::placeholder { color: #6a8fb0; }
+.input:focus        { border-color: var(--blue); }
+.inputError         { border-color: var(--danger) !important; }
+
+.textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--blue-input);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius);
+  color: #1a2b3c;
+  font-size: 0.92rem;
+  font-family: inherit;
+  outline: none;
+  resize: vertical;
+  line-height: 1.6;
+  transition: border-color 0.2s;
+}
+.textarea::placeholder { color: #6a8fb0; }
+.textarea:focus        { border-color: var(--blue); }
+
+.selectWrap {
+  position: relative;
+}
+
+.select {
+  width: 100%;
+  padding: 11px 36px 11px 14px;
+  background: var(--blue-input);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius);
+  color: #1a2b3c;
+  font-size: 0.92rem;
+  font-family: inherit;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.select:focus { border-color: var(--blue); }
+
+.selectArrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #4a6a85;
+  pointer-events: none;
+  font-size: 0.85rem;
+}
+
+.imagePreviewBox {
+  width: 100%;
+  height: 200px;
+  background: var(--bg3);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--border);
+  transition: border-color 0.2s;
+}
+.imagePreviewBox.hasImage { border-style: solid; border-color: var(--blue); }
+
+.bannerPreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imagePlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.posterGrid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+  margin-bottom: 28px;
+  align-items: start;
+}
+
+.posterCol { display: flex; flex-direction: column; gap: 10px; }
+
+.posterBox {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  background: var(--bg3);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--border);
+  transition: border-color 0.2s;
+}
+.posterBox.hasImage { border-style: solid; border-color: var(--blue); }
+
+.posterPreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fieldsCol { display: flex; flex-direction: column; }
+
+
+.error {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--danger);
+  margin-top: 4px;
+}
+
+.erroGeral {
+  font-size: 0.88rem;
+  color: var(--danger);
+  text-align: center;
+  margin-bottom: 16px;
+  background: rgba(192, 57, 43, 0.1);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+}
+
+.submitRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 32px;
+}
+
+.btnPrimary {
+  padding: 12px 36px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+  font-family: inherit;
+}
+.btnPrimary:hover:not(:disabled) { background: #4a8ec2; }
+.btnPrimary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.sucesso {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 16px;
+  min-height: 60vh;
+  padding: 40px 24px;
+}
+
+.sucessoIcon { font-size: 4rem; }
+
+.sucesso h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.sucesso p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .posterGrid {
+    grid-template-columns: 1fr;
+  }
+  .posterBox {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+.filtersGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.fullWidth {
+  width: 100%;
+  margin-bottom: 28px;
+}
+
+.selectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 10px;
+
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.selectionBox {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 8px;
+
+  min-height: 120px;
+  max-height: 140px;
+
+  overflow-y: auto;
+
+  padding: 12px;
+
+  background: var(--bg3);
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+
+  scrollbar-width: thin;
+}
+
+.selectionBox::-webkit-scrollbar {
+  width: 6px;
+}
+
+.selectionBox::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+
+.chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 14px;
+
+  background: transparent;
+
+  border: 1px solid var(--border);
+  border-radius: 999px;
+
+  color: var(--text);
+
+  font-size: 0.85rem;
+  font-weight: 500;
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.chip:hover {
+  border-color: var(--blue);
+  transform: translateY(-1px);
+}
+
+.chipOn {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+
+.peopleGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
+  gap: 24px;
+
+  margin-bottom: 28px;
+}
+
+@media (max-width: 1024px) {
+  .filtersGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .filtersGrid,
+  .peopleGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .selectionBox {
+    max-height: 180px;
+  }
+}

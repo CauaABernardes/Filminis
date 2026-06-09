@@ -9,6 +9,7 @@ import TodosFilmes from './pages/TodosFilmes/TodosFilmes';
 import Filme       from './pages/Filme/Filme';
 import Login       from './pages/Login/Login';
 import Cadastro    from './pages/Cadastro/Cadastro';
+import Sugestao    from './pages/Sugestao/Sugestao.jsx';
 
 function GuestRoute({ children }) {
   const { user, loading } = useAuth();
@@ -34,15 +35,7 @@ export default function App() {
             path="/sugestao"
             element={
               <ProtectedRoute>
-                <Navigate to="/" replace />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/sugestao/:id"
-            element={
-              <ProtectedRoute>
-                <Navigate to="/" replace />
+                <Sugestao />
               </ProtectedRoute>
             }
           />
