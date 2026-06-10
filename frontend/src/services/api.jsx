@@ -32,11 +32,11 @@ api.interceptors.response.use(
 
 export const filmesService = {
   listar:    (params) => api.get('/filmes', { params }),
-  buscar:    (id)     => api.get(`/filmes/${id}`),
+  buscar:    (id_filme)     => api.get(`/filmes/${id_filme}`),
   criar:     (data)   => api.post('/filmes', data),
-  editar:    (id, d)  => api.patch(`/filmes/${id}`, d),
-  aprovar:   (id)     => api.put(`/filmes/${id}/aprovar`),
-  deletar:   (id)     => api.delete(`/filmes/${id}`),
+  editar:    (id_filme, d)  => api.patch(`/filmes/${id_filme}`, d),
+  aprovar:   (id_filme)     => api.put(`/filmes/${id_filme}/aprovar`),
+  deletar:   (id_filme)     => api.delete(`/filmes/${id_filme}`),
   pendentes: ()       => api.get('/filmes/pendentes'),
 };
 

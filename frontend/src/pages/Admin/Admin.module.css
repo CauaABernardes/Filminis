@@ -1,0 +1,344 @@
+.page { min-height: 100vh; background: var(--bg); }
+
+.inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+.titulo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 28px;
+}
+
+.abas {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.aba {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--muted);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.aba:hover { color: var(--text); }
+
+.abaAtiva {
+  color: var(--text);
+  border-bottom-color: var(--blue);
+}
+
+.badge {
+  background: var(--blue);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 99px;
+}
+
+.vazio { color: var(--muted); padding: 20px 0; }
+
+.vazioBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 60px 24px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.vazioIcon { font-size: 2.5rem; }
+
+.listaFilmes {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.filmeCard {
+  display: grid;
+  grid-template-columns: 90px 1fr auto;
+  gap: 20px;
+  align-items: start;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  transition: border-color 0.2s;
+}
+.filmeCard:hover { border-color: var(--bg4); }
+
+.posterWrap {
+  width: 90px;
+  height: 130px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bg3);
+  flex-shrink: 0;
+}
+.poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.posterPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--muted);
+}
+
+.filmeInfo { display: flex; flex-direction: column; gap: 6px; }
+
+.filmeTitulo {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.filmeSub {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-style: italic;
+}
+.filmeMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.sinopse {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 4px;
+}
+.sugeridoPor {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.sugeridoPor strong { color: var(--text); }
+
+.acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+  flex-shrink: 0;
+  min-width: 110px;
+}
+
+.btnAprovar {
+  padding: 8px 18px;
+  background: var(--success);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: opacity 0.2s;
+}
+.btnAprovar:hover:not(:disabled) { opacity: 0.85; }
+.btnAprovar:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btnNegar {
+  padding: 8px 18px;
+  background: transparent;
+  color: var(--danger);
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: 1px solid var(--danger);
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s, color 0.2s;
+}
+.btnNegar:hover { background: var(--danger); color: #fff; }
+
+.confirmarNegar {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  width: 100%;
+}
+.confirmarNegar p {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+  text-align: center;
+}
+.confirmarBtns { display: flex; gap: 6px; }
+
+.tabelaWrap {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.tabela thead {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+
+.tabela th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.tabela td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.tabela tbody tr:last-child td { border-bottom: none; }
+.tabela tbody tr:hover { background: var(--bg2); }
+
+.userCell { display: flex; align-items: center; gap: 10px; }
+
+.userAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.userAvatarFallback {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+.userName  { font-weight: 600; font-size: 0.88rem; }
+.userApelido { font-size: 0.75rem; color: var(--muted); }
+.muted { color: var(--muted); }
+
+.roleBadge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.roleAdmin { background: rgba(91,155,213,0.2); color: var(--blue); }
+.roleUser  { background: var(--bg3); color: var(--muted); }
+
+.btnPromover {
+  padding: 6px 14px;
+  background: transparent;
+  color: var(--blue);
+  border: 1px solid var(--blue);
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+.btnPromover:hover { background: var(--blue); color: #fff; }
+
+.btnPerigo {
+  padding: 6px 12px;
+  background: var(--danger);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.btnPerigo:hover { opacity: 0.85; }
+
+.btnGhost {
+  padding: 6px 12px;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s;
+}
+.btnGhost:hover { color: var(--text); border-color: var(--text); }
+
+.btnSim {
+  padding: 6px 12px;
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.btnSim:hover { opacity: 0.85; }
+
+.confirmarInline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 0.78rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .filmeCard { grid-template-columns: 70px 1fr; }
+  .acoes { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+  .btnAprovar, .btnNegar { width: auto; }
+}

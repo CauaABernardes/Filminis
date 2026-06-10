@@ -132,7 +132,7 @@ export default function Sugestao() {
                 className={s.input}
                 type="text"
                 name="orcamento"
-                placeholder="$20M"
+                placeholder="$20000000"
                 value={form.orcamento}
                 onChange={handleChange}
               />

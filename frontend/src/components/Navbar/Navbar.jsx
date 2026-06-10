@@ -8,7 +8,7 @@ export default function Navbar() {
   return (
     <nav className={s.navbar}>
       <Link to="/" className={s.brand}>
-        <div className={s.brandIcon}>🎬</div>
+        
         Sr. Movies
       </Link>
 
@@ -37,7 +37,7 @@ export default function Navbar() {
               {user.nome?.charAt(0).toUpperCase()}
             </span>
           ) : (
-            '👤'
+            <img src='/'/>
           )}
         </button>
 
