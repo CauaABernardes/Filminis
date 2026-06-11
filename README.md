@@ -59,7 +59,7 @@ Aplicação full-stack para gerenciar, classificar e compartilhar filmes. Desenv
 
 ---
 
-## ✅ Pré-requisitos
+## Pré-requisitos
 
 - **Python 3.11+** e `pip`
 - **MySQL 8.0+** (localmente ou em Docker)
@@ -269,7 +269,7 @@ O servidor estará disponível em:
 
 ---
 
-### 🎨 Frontend (React)
+### Frontend (React)
 
 #### Passo 1: Entrar na pasta do frontend
 
