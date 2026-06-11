@@ -68,7 +68,7 @@ Aplicação full-stack para gerenciar, classificar e compartilhar filmes. Desenv
 
 ### Verificar instalação
 
-OBS: Banco de dados é opcional devido a ter um fallback para utilização de um baco SQLLite local
+OBS: Banco de dados é opcional devido a ter um fallback para utilização de um baco SQLite local
 
 ```bash
 # Python
@@ -121,6 +121,7 @@ docker run -d \
   -p 3306:3306 \
   mysql:8.0
 ```
+#### Opção C (Recomendada): Utilizar SQLite
 
 ### 2. Clonar o Repositório
 
@@ -164,7 +165,7 @@ pip install -r requirements.txt
 
 #### Passo 4 (Opcional): Configurar variáveis de ambiente
 
-Caso não Queira há um fallback que utiliza um banco de dados SQLLite local
+Caso não Queira há um fallback que utiliza um banco de dados SQLite local
 
 Copie o arquivo de exemplo:
 
