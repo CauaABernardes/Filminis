@@ -1,6 +1,6 @@
 # Filminis - Gerenciador de Filmes
 
-Aplicação full-stack para gerenciar, classificar e compartilhar filmes. Desenvolvido como projeto avaliativo do SENAI "Roberto Mange" — Unidade curricular: Front-End / PI02.
+Aplicação full-stack para gerenciar, classificar e compartilhar filmes. Desenvolvido como projeto avaliativo do SENAI "Roberto Mange".
 
 ---
 
