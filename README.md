@@ -70,6 +70,8 @@ Aplicação full-stack para gerenciar, classificar e compartilhar filmes. Desenv
 
 OBS: Banco de dados é opcional devido a ter um fallback para utilização de um baco SQLite local
 
+Por precaução o banco Sqlite já está upado e populado
+
 ```bash
 # Python
 python --version  # ou python3 --version
