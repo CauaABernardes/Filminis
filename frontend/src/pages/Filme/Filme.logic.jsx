@@ -33,10 +33,15 @@ export function useFilme() {
 
   // Bandeiras: mostra país de origem + demais (até 3) + "+X"
   const bandeiras = () => {
-    if (!paises.length) return { principais: [], extra: 0 };
-    const LIMITE = 3;
-    const principais = paises.slice(0, LIMITE);
-    const extra = paises.length > LIMITE ? paises.length - LIMITE : 0;
+    // Monta lista: pais_origem primeiro (se não estiver em paises), depois os demais
+    const lista = [...paises];
+    if (paisOrigem && !lista.find(p => p.id_pais === paisOrigem.id_pais)) {
+      lista.unshift(paisOrigem);
+    }
+    if (!lista.length) return { principais: [], extra: 0 };
+    const LIMITE = 5;
+    const principais = lista.slice(0, LIMITE);
+    const extra = lista.length > LIMITE ? lista.length - LIMITE : 0;
     return { principais, extra };
   };
 

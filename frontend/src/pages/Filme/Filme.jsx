@@ -5,7 +5,7 @@ import { useFilme } from './Filme.logic';
 import { getBandeira } from '../../utils/helpers';
 
 export default function Filme() {
-  const { filme, loading, erro, handleSugestao, duracao, orcamento, bandeirasArr, bandeirasExtra, youtubeId } = useFilme();
+  const { filme, loading, erro, handleSugestao, duracao, orcamento, bandeira, bandeirasArr, bandeirasExtra, youtubeId } = useFilme();
 
   if (loading) return <div className={s.page}><Navbar /><div className={s.loading}>Carregando...</div></div>;
   if (erro)    return <div className={s.page}><Navbar /><div className={s.erro}>{erro}</div></div>;
@@ -27,7 +27,7 @@ export default function Filme() {
           <h1>{filme.titulo}</h1>
           <div className={s.tituloRight}>
             {bandeirasArr[0] && (
-              <span className={s.bandeiraPrincipal}>{getBandeira(bandeirasArr[0].nome)}</span>
+              <span className={s.bandeiraPrincipal}>{bandeira}</span>
             )}
             {filme.classificacao && (
               <span className={s.classificacao}>{filme.classificacao}</span>
