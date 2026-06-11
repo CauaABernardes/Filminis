@@ -88,6 +88,8 @@ npm --version
 
 ### 1. Preparar o Banco de Dados
 
+Opção Recomendada é a **C**
+
 #### Opção A: MySQL Localmente
 
 Certifique-se de que MySQL está rodando:
@@ -211,7 +213,7 @@ alembic revision --autogenerate -m "Descrição da mudança"
 alembic upgrade head
 ```
 
-#### Passo 6: Popular o Banco (Seed)
+#### Passo 6: Popular o Banco (population)
 
 Execute o script de população que insere dados iniciais automáticamente:
 
@@ -230,7 +232,7 @@ Isso insere:
 - 5 Filmes em destaque
 - 2 Usuários de teste (admin e user)
 
-**Credenciais padrão após seed:**
+**Credenciais padrão após population:**
 ```
 Admin:
   Email: admin@filminis.com
@@ -513,15 +515,15 @@ alembic current
 
 ---
 
-## 👨‍💼 Criando o Primeiro Admin
+## Criando o Primeiro Admin
 
-Após rodar o projeto e populá-lo, crie um usuário comum pela API:
+Após rodar o projeto e populá-lo, crie um usuário comum pela interface:
 
 e com o admin já pre cadastrado altere a role dele
 
 ---
 
-## 📝 Exemplos de Requisições
+## Exemplos de Requisições
 
 ### 1. Registrar Novo Usuário
 
@@ -594,7 +596,7 @@ curl http://localhost:8000/usuarios/me \
 
 ---
 
-## 🆘 Troubleshooting
+## Troubleshooting
 
 ### Erro: "Connection refused" ao conectar no MySQL
 
@@ -641,12 +643,12 @@ uvicorn app.main:app --reload --port 8001
 npm run dev -- --port 3001
 ```
 
-## 📄 Licença
+## Licença
 
 Projeto desenvolvido como atividade avaliativa do SENAI "Roberto Mange".
 
 ---
 
-## ✨ Desenvolvido com lágrimas e suor
+## Desenvolvido com lágrimas e suor
 
-**Filminis API** — Gerenciador de Filmes | SENAI PI02 | 2024/2025
+**Filminis API** — Gerenciador de Filmes | SENAI | 2026
