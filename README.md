@@ -458,7 +458,7 @@ curl -X PUT http://localhost:8000/home/destaques \
 
 ---
 
-## 🗄️ Migrations e Banco de Dados
+## Migrations e Banco de Dados
 
 ### Fluxo do Alembic
 
@@ -508,7 +508,7 @@ alembic current
 
 ---
 
-## 🎯 Regras de Negócio
+## Regras de Negócio
 
 - Qualquer usuário autenticado pode cadastrar filmes (ficam pendentes)
 - Apenas **admins** podem aprovar, editar e deletar filmes
